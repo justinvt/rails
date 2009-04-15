@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+model_name    = ARGV[0]
+template_name = ARGV[1]
+
+base_command = "ruby script/generate #{model_name}"
+
+templates = {
+  :article => "title:string description:text user_id:integer"
+}
+
+template = templates[template_name.to_sym]
+
+system [base_command, template].join(" ")
+  
