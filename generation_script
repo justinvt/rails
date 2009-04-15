@@ -1,0 +1,18 @@
+#!/usr/bin/ruby
+
+application = ARGV[0]
+system "git clone git://github.com/justinvt/rails.git"
+system "mv rails #{application}"
+
+db_file = File.join(application,"config/database.yml")
+db_config = File.read(db_file).gsub("myrails",application)
+f = File.open(db_file, "w+")
+f.puts db_config
+f.close
+
+system "cd #{application};rake db:create;cd .."
+system "cd #{application};rake db:migrate;cd .."
+system "mate #{application}"
+
+system "cd #{application}"
+system "ruby script/server"
