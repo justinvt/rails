@@ -1,0 +1,4 @@
+#!/bin/bash
+
+sudo cp generation_script /usr/local/bin/myrails
+sudo chmod +x /usr/local/bin/myrails
