@@ -1,5 +1,9 @@
 #!/usr/bin/ruby
 
+def fa(command)
+  system "cd #{application};#{command};cd .."
+end
+
 application = ARGV[0]
 system "git clone git://github.com/justinvt/rails.git"
 system "mv rails #{application}"
@@ -10,9 +14,8 @@ f = File.open(db_file, "w+")
 f.puts db_config
 f.close
 
-system "cd #{application};rake db:create;cd .."
-system "cd #{application};rake db:migrate;cd .."
+fa "rake db:create"
+fa "rake db:migrate"
 system "mate #{application}"
 
-system "cd #{application}"
-system "ruby script/server"
+system "cd #{application};ruby script/server"
