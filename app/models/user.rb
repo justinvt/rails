@@ -2,9 +2,16 @@ require 'digest/sha1'
 
 class User < ActiveRecord::Base
   include Authentication
-  #include Authentication::ByPassword
-  #include Authentication::ByCookieToken
-  #include Authorization::StatefulRoles
+  include Authentication::ByPassword
+  include Authentication::ByCookieToken
+  include Authorization::StatefulRoles
+  
+  
+    has_attached_file :avatar, 
+                    :styles => { :medium => "300x300>",
+                                 :thumb => "100x100>" }
+
+
   validates_presence_of     :login
   validates_length_of       :login,    :within => 3..40
   validates_uniqueness_of   :login
